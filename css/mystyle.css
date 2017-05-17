@@ -1,0 +1,111 @@
+.container{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+th{
+		vertical-align: middle;
+	}
+
+	.table>thead>tr>th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table>tbody>tr>th {
+    vertical-align: middle;
+    text-align: center;
+}
+#standar31 input{
+	padding: 0px;
+}
+
+.btn.btn-success.fileinput-button{
+	
+}
+
+.navbar-default{
+	background-image: none;
+}
+.btn-primary, .btn-success, .btn-info, .btn-danger{
+	background-image: none;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+	background-image: none;
+	}
+
+.h1, h1 {
+    font-size: 16px;
+}
+
+.h3, h3 {
+    font-size: 14px;
+}
+
+input[type=checkbox] {
+    margin: 4px 0 0;
+    margin-top: 1px \9;
+    line-height: normal;
+
+    margin-top: 0px;
+    height: 30px;
+}
+
+.alert-warning,.alert-info,.alert-success,.alert-danger {
+    background-image: none;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
+    color: #FFFFFF;
+}
+.navbar-default .btn-link, .navbar-default .navbar-brand, .navbar-default .navbar-link {
+    color: #FFFFFF;
+}
+
+.view input[type="number"]{
+    border: none;
+}
+.view button{
+    display: none;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+.panel-info > .panel-heading {
+    background-image: none;
+    background-repeat: repeat-x;
+}
+.panel-menu.panel-info > .panel-heading{
+    text-align: center;
+}
+.panel-menu .panel-body{
+    text-align: center;
+    color: #37BC9B;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+    margin-top: -0px;
+    margin-bottom: -1px;
+}
+.bg-info {
+    background-color: #37bc9b;
+}
+.navbar-default {
+    background-color: #37bc9b;
+    border-color: #86d3c0;
+}
+
+/*.panel-login{
+    background: rgba(55, 188, 155, 0.36);
+}
+.panel-login .form-control{
+   background: rgba(232, 243, 240, 0.38);
+   color:#fff;
+}*/
