@@ -52,9 +52,9 @@ class Mctrl1 extends CI_Controller
 		$q = $this->db->query("select * from struktur_kurikulum where id_submission=$idsubmission order by semester asc");
 		$data = $q->result();
 		echo json_encode($data);
-		
+
 	}
-	
+
 
 
 	function getdata52(){
@@ -65,8 +65,8 @@ class Mctrl1 extends CI_Controller
 		echo json_encode($data);
 	}
 
-	
-	
+
+
 	function getdata53(){
 		$obj = json_decode(file_get_contents('php://input'));
 		$idsubmission = $obj->id_submission;
@@ -83,13 +83,13 @@ class Mctrl1 extends CI_Controller
 
 		$dtgab  = array($data1 ,$data2 );
 		echo json_encode($dtgab);
-		
 
-		
+
+
 	}
-	
 
-	
+
+
 
 	function getdata54(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -99,7 +99,7 @@ class Mctrl1 extends CI_Controller
 		echo json_encode($data);
 	}
 
-	
+
 	function getdata55(){
 		$obj = json_decode(file_get_contents('php://input'));
 		$idsubmission = $obj->id_submission;
@@ -107,7 +107,7 @@ class Mctrl1 extends CI_Controller
 		$data = $q->result();
 		echo json_encode($data);
 	}
-	
+
 
 	function calculatetotalst5f5c2(){
 		$idsubmission = $this->input->post('idsubmission');
@@ -116,7 +116,7 @@ class Mctrl1 extends CI_Controller
 		echo $data[0]->jm;
 	}
 
-	
+
 
 	function getdata56(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -125,12 +125,12 @@ class Mctrl1 extends CI_Controller
 		$q1 = $this->db->query("select * from data_dosen_pembimbing where id_submission=$idsubmission order by th asc");
 			$data1 = $q1->result();
 			echo json_encode($data1);
-		
+
 
 	}
 	private function countitemthxdosenpembimbing($th,$ids){
 		$d = $this->db->query("select * from data_dosen_pembimbing where id_submission=$ids and th=$th");
-		return $d->num_rows(); 
+		return $d->num_rows();
 	}
 	private function sumallmahasiswathxdosenpembimbing($th,$ids){
 		$d = $this->db->query("select *,sum(jumlah_mahasiswa) as jm from data_dosen_pembimbing where id_submission=$ids and th=$th");
@@ -138,7 +138,7 @@ class Mctrl1 extends CI_Controller
 		return $rst[0]->jm;
 	}
 
-	
+
 
 	function getdata57(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -146,10 +146,10 @@ class Mctrl1 extends CI_Controller
 		$q = $this->db->query("select * from keselamatan_kerja where id_submission=$idsubmission");
 		$data = $q->result();
 		echo json_encode($data);
-		
+
 	}
 
-	
+
 	function getdata61(){
 		$obj = json_decode(file_get_contents('php://input'));
 		$idsubmission = $obj->id_submission;
@@ -160,7 +160,7 @@ class Mctrl1 extends CI_Controller
 		echo json_encode($data);
 	}
 
-	
+
 
 	function totaldata61(){
 
@@ -168,8 +168,8 @@ class Mctrl1 extends CI_Controller
 		$idsubmission = $obj->id_submission;
 		echo "
 		<tr>
-			
-			
+
+
 			<td colspan=\"2\">Total</td>
 			<td>".$this->counttotalth261()."</td>
 			<td>".$this->counttotalth161()."</td>
@@ -221,13 +221,13 @@ class Mctrl1 extends CI_Controller
 	}
 
 	private function loadtable621($idsubmission){
-		
+
 		$q = $this->db->query("select * from penggunaan_dana where id_submission=$idsubmission and tipe_penggunaan=1");
 		$data = $q->result();
 		return $data;
 	}
 	private function loadtable622($idsubmission){
-		
+
 		$q = $this->db->query("select * from penggunaan_dana where id_submission=$idsubmission and tipe_penggunaan=2");
 		$data = $q->result();
 		return $data;
@@ -239,9 +239,9 @@ class Mctrl1 extends CI_Controller
 
 	function simpantotal621(){
 		$idsubmission = $this->input->post('idsubmission');
-		$st6f21c1 = $this->input->post('field1'); 
-		$st6f21c2 = $this->input->post('field2'); 
-		$st6f21c3 = $this->input->post('field3'); 
+		$st6f21c1 = $this->input->post('field1');
+		$st6f21c2 = $this->input->post('field2');
+		$st6f21c3 = $this->input->post('field3');
 
 		$data = array(
 				'id_submission'=>$idsubmission,
@@ -256,9 +256,9 @@ class Mctrl1 extends CI_Controller
 	}
 	function simpantotal622(){
 		$idsubmission = $this->input->post('idsubmission');
-		$st6f21c1 = $this->input->post('field1'); 
-		$st6f21c2 = $this->input->post('field2'); 
-		$st6f21c3 = $this->input->post('field3'); 
+		$st6f21c1 = $this->input->post('field1');
+		$st6f21c2 = $this->input->post('field2');
+		$st6f21c3 = $this->input->post('field3');
 
 		$data = array(
 				'id_submission'=>$idsubmission,
@@ -289,430 +289,64 @@ class Mctrl1 extends CI_Controller
 		echo json_encode($s);
 	}
 
-	function simpandata63(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st6f3c1 = $this->input->post('field1');
-		$st6f3c2 = $this->input->post('field2');
-		$st6f3c3 = $this->input->post('field3');
-		$st6f3c4 = $this->input->post('field4');
-		$st6f3c5 = $this->input->post('field5');
-		$st6f3c6 = $this->input->post('field6');
 
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'nama_dosen'=>$st6f3c1,
-				'judul_pengabdian'=>$st6f3c2,
-				'tahun'=>$st6f3c3,
-				'sumber_dana'=>$st6f3c4,
-				'jumlah_dana'=>$st6f3c5,
-				'id_attachmentfile'=>$st6f3c6
-			);
-
-		$this->db->insert('dana_untuk_penelitian',$data);
-	}
 
 	function getdata63(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$q = $this->db->query("select * from dana_untuk_penelitian where id_submission=$idsubmission");
 		$data = $q->result();
-		$nmr=1;
-		foreach ($data as $d) {
-			echo "<tr>";
-				echo "<td>$nmr</td>";
-				echo "<td>".$d->nama_dosen."</td>";
-				echo "<td>".$d->judul_pengabdian."</td>";
-				echo "<td>".$d->tahun."</td>";
-				echo "<td>".$d->sumber_dana."</td>";
-				echo "<td>".$d->jumlah_dana."</td>";
-				echo "<td><a href='".base_url('submissionfile/download')."/".$d->id_attachmentfile."'> Download Data </a></td>";
-				if(isdraf($idsubmission)){
-					echo "<td>
-					<button type='button' class='btn btn-danger' onClick='hapusdata63(".$d->id_dana_untuk_penelitian.")'> 
-							<span class='glyphicon glyphicon-remove'></span>
-						 </button>
-					</td>";
-				}
-			echo "</tr>";
+		echo json_encode($data);
 
-			$nmr++;
-		}
-	}
-
-	function hapusdata63(){
-		$idrecord = $this->input->post('idrecord');
-		$this->db->query("delete from dana_untuk_penelitian where id_dana_untuk_penelitian=$idrecord");
 	}
 
 
-
-
-
-
-	function simpandata64(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st6f3c1 = $this->input->post('field1');
-		$st6f3c2 = $this->input->post('field2');
-		$st6f3c3 = $this->input->post('field3');
-		$st6f3c4 = $this->input->post('field4');
-		$st6f3c5 = $this->input->post('field5');
-		
-
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'nama_dosen'=>$st6f3c1,
-				'judul_pengabdian'=>$st6f3c2,
-				'tahun'=>$st6f3c3,
-				'sumber_dana'=>$st6f3c4,
-				'jumlah_dana'=>$st6f3c5,
-				
-			);
-
-		$this->db->insert('dana_diperoleh_dari_penelitian',$data);
-	}
 
 	function getdata64(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$q = $this->db->query("select * from dana_diperoleh_dari_penelitian where id_submission=$idsubmission");
 		$data = $q->result();
-		$nmr=1;
-		foreach ($data as $d) {
-			echo "<tr>";
-				echo "<td>$nmr</td>";
-				echo "<td>".$d->nama_dosen."</td>";
-				echo "<td>".$d->judul_pengabdian."</td>";
-				echo "<td>".$d->tahun."</td>";
-				echo "<td>".$d->sumber_dana."</td>";
-				echo "<td>".$d->jumlah_dana."</td>";
-				if(isdraf($idsubmission)){
-					echo "<td>
-					<button type='button' class='btn btn-danger' onClick='hapusdata64(".$d->id_dana_untuk_penelitian.")'> 
-							<span class='glyphicon glyphicon-remove'></span>
-						 </button>
-					</td>";
-				}
-			echo "</tr>";
-
-			$nmr++;
-		}
+		echo json_encode($data);
 	}
 
-	function hapusdata64(){
-		$idrecord = $this->input->post('idrecord');
-		$this->db->query("delete from dana_diperoleh_dari_penelitian where id_dana_untuk_penelitian=$idrecord");
-	}
-
-
-
-	function simpandata65(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st6f5c1 = $this->input->post('field1');
-		$st6f5c2 = $this->input->post('field2');
-		$st6f5c3 = $this->input->post('field3');
-		
-		
-
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'ruang_kerja_dosen'=>$st6f5c1,
-				'jumlah_ruang'=>$st6f5c2,
-				'jumlah_luas'=>$st6f5c3
-				
-				
-			);
-
-		$this->db->insert('prasarana',$data);
-	}
-	
 	function getdata65(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$q = $this->db->query("select * from prasarana where id_submission=$idsubmission");
 		$data = $q->result();
-		$nmr=1;
-		foreach ($data as $d) {
-			echo "<tr>";
-				
-				echo "<td>".$d->ruang_kerja_dosen."</td>";
-				echo "<td>".$d->jumlah_ruang."</td>";
-				echo "<td>".$d->jumlah_luas."</td>";
-				
-				if(isdraf($idsubmission)){
-				echo "<td>
-				<button type='button' class='btn btn-danger' onClick='hapusdata65(".$d->id_prasarana.")'> 
-						<span class='glyphicon glyphicon-remove'></span>
-					 </button>
-				</td>";
-				}
-			echo "</tr>";
-
-			$nmr++;
-		}
-	}
-
-	function hapusdata65(){
-		$idrecord = $this->input->post('idrecord');
-		$this->db->query("delete from prasarana where id_prasarana=$idrecord");
-	}
-
-	function gettotal65(){
-		$idsubmission = $this->input->post('idsubmission');
-		$q = $this->db->query("select sum(jumlah_ruang) as jr, sum(jumlah_luas) as jl from prasarana where id_submission=$idsubmission");
-		$d = $q->result();
-		echo "<tr>
-			
-			<th>Total</th>
-			<td>".$d[0]->jr."</td>
-			<td>".$d[0]->jl."</td>";
-			if(isdraf($idsubmission)){
-				echo "<td></td>";
-			}
-		echo "</tr>";
-	}
-
-	function simpandata66(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st6f6c1 = $this->input->post('field1');
-		$st6f6c2 = $this->input->post('field2');
-		$st6f6c3 = $this->input->post('field3');
-		$st6f6c4 = $this->input->post('field4');
-		$st6f6c5 = $this->input->post('field5');
-		$st6f6c6 = $this->input->post('field6');
-		$st6f6c7 = $this->input->post('field7');
-		$st6f6c8 = $this->input->post('field8');
-
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'jenis_prasarana'=>$st6f6c1,
-				'jumlah_unit'=>$st6f6c2,
-				'total_luas'=>$st6f6c3,
-				'sd'=>$st6f6c4,
-				'sw'=>$st6f6c5,
-				'terawat'=>$st6f6c6,
-				'tidak_terawat'=>$st6f6c7,
-				'utilitas'=>$st6f6c8
-			);
-
-		$this->db->insert('prasarana_kecuali_ruang_dosen',$data);
+		echo json_encode($data);
 	}
 
 	function getdata66(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$this->db->where('id_submission',$idsubmission);
 		$q = $this->db->get('prasarana_kecuali_ruang_dosen');
 		$data = $q->result();
-
-		$nmr=1;
-		foreach ($data as $d) {
-			echo "
-				<tr>
-					<td>$nmr</td>
-					<td>".$d->jenis_prasarana."</td>
-					<td>".$d->jumlah_unit."</td>
-					<td>".$d->total_luas."</td>
-					<td>";
-							if($d->sd ==1){
-								echo " &#10004 ";
-							}							
-			echo "</td>
-			<td>";
-							if($d->sw ==1){
-								echo " &#10004 ";
-							}					
-			echo "</td>
-			<td>";
-							if($d->terawat ==1){
-								echo " &#10004 ";
-							}					
-			echo "</td>
-			<td>";
-							if($d->tidak_terawat ==1){
-								echo " &#10004 ";
-							}					
-			echo "</td>
-			<td>".$d->utilitas."</td>";
-				if(isdraf($idsubmission)){
-				echo "<td>
-
-					<button type='button' class='btn btn-danger' onClick='hapusdata66(".$d->id_prasarana_kecuali_ruang_dosen.")'> 
-						<span class='glyphicon glyphicon-remove'></span>
-					 </button>
-
-					</td>";
-				}
-				echo "</tr>";
-		$nmr++;
-		}
-	}
-
-	function hapusdata66(){
-		$idrecord = $this->input->post('idrecord');
-		$this->db->query("delete from prasarana_kecuali_ruang_dosen where id_prasarana_kecuali_ruang_dosen=$idrecord");
-	}
-
-
-
-
-
-
-	function simpandata67(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st6f7c1 = $this->input->post('field1');
-		$st6f7c2 = $this->input->post('field2');
-		$st6f7c3 = $this->input->post('field3');
-		$st6f7c4 = $this->input->post('field4');
-		$st6f7c5 = $this->input->post('field5');
-		$st6f7c6 = $this->input->post('field6');
-		$st6f7c7 = $this->input->post('field7');
-		$st6f7c8 = $this->input->post('field8');
-
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'jenis_prasarana'=>$st6f7c1,
-				'jumlah_unit'=>$st6f7c2,
-				'total_luas'=>$st6f7c3,
-				'sd'=>$st6f7c4,
-				'sw'=>$st6f7c5,
-				'terawat'=>$st6f7c6,
-				'tidak_terawat'=>$st6f7c7,
-				'utilitas'=>$st6f7c8
-			);
-
-		$this->db->insert('prasarana_penunjang',$data);
+		echo json_encode($data);
 	}
 
 	function getdata67(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$this->db->where('id_submission',$idsubmission);
 		$q = $this->db->get('prasarana_penunjang');
 		$data = $q->result();
+		echo json_encode($data);
 
-		$nmr=1;
-		foreach ($data as $d) {
-			echo "
-				<tr>
-					<td>$nmr</td>
-					<td>".$d->jenis_prasarana."</td>
-					<td>".$d->jumlah_unit."</td>
-					<td>".$d->total_luas."</td>
-					<td>";
-							if($d->sd ==1){
-								echo " &#10004 ";
-							}							
-			echo "</td>
-			<td>";
-							if($d->sw ==1){
-								echo " &#10004 ";
-							}					
-			echo "</td>
-			<td>";
-							if($d->terawat ==1){
-								echo " &#10004 ";
-							}					
-			echo "</td>
-			<td>";
-							if($d->tidak_terawat ==1){
-								echo " &#10004 ";
-							}					
-			echo "</td>
-			<td>".$d->utilitas."</td>";
-				if(isdraf($idsubmission)){
-				echo "<td>
-
-					<button type='button' class='btn btn-danger' onClick='hapusdata67(".$d->id_prasarana_penunjang.")'> 
-						<span class='glyphicon glyphicon-remove'></span>
-					 </button>
-
-					</td>";
-				}
-				echo "</tr>";
-		$nmr++;
-		}
-	}
-
-	function hapusdata67(){
-		$idrecord = $this->input->post('idrecord');
-		$this->db->query("delete from prasarana_penunjang where id_prasarana_penunjang=$idrecord");
-	}
-
-
-	function simpandata68(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st6f8c1 = $this->input->post('field1');
-		$st6f8c2 = $this->input->post('field2');
-		$st6f8c3 = $this->input->post('field3');
-
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'jenis_pustaka'=>$st6f8c1,
-				'jumlah_judul'=>$st6f8c2,
-				'jumlah_copy'=>$st6f8c3
-			);
-
-		$this->db->insert('pustaka',$data);
 	}
 
 	function getdata68(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$this->db->where('id_submission',$idsubmission);
 		$q = $this->db->get('pustaka');
 		$data = $q->result();
-		foreach ($data as $d) {
-			echo "<tr>";
-				echo "<td>".$d->jenis_pustaka."</td>";
-				echo "<td>".$d->jumlah_judul."</td>";
-				echo "<td>".$d->jumlah_copy."</td>";
-				if(isdraf($idsubmission)){
-				echo "<td>
-						<button type='button' class='btn btn-danger' onClick='hapusdata68(".$d->id_pustaka.")'> 
-						<span class='glyphicon glyphicon-remove'></span>
-					 </button>
-				</td>";
-				}
-			echo "</tr>";
-		}
+		echo json_encode($data);
 
 	}
-	function hapusdata68(){
-		$idrecord = $this->input->post('idrecord');
-		$this->db->query("delete from pustaka where id_pustaka=$idrecord");
-	}
 
-
-	function simpaninduk69(){
-		$idsubmission = $this->input->post('idsubmission');
-		$namalab = $this->input->post('namalab');
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'nama_lab'=>$namalab
-			);
-		$this->db->insert('peralatan_lab',$data);
-		echo $this->db->insert_id();
-	}
-
-	function simpandata69modal(){
-		$st6f9c9 = $this->input->post('field9');
-		$st6f9c1 = $this->input->post('field1');
-		$st6f9c2 = $this->input->post('field2');
-		$st6f9c3 = $this->input->post('field3');
-		$st6f9c4 = $this->input->post('field4');
-		$st6f9c5 = $this->input->post('field5');
-		$st6f9c6 = $this->input->post('field6');
-		$st6f9c7 = $this->input->post('field7');
-		$st6f9c8 = $this->input->post('field8');
-
-		$data = array(
-				'id_peralatan_lab'=>$st6f9c9,
-				'jenis_prasarana'=>$st6f9c1,
-				'jumlah_unit'=>$st6f9c2,
-				'rasio'=>$st6f9c3,
-				'sd'=>$st6f9c4,
-				'sw'=>$st6f9c5,
-				'baik'=>$st6f9c6,
-				'rusak'=>$st6f9c7,
-				'rerata_waktu_penggunaan'=>$st6f9c8
-			);
-
-		$this->db->insert('detail_peralatan_lab',$data);
-	}
 
 	function getdata69modal(){
 		$idinduk = $this->input->post('idinduk69');
@@ -730,27 +364,27 @@ class Mctrl1 extends CI_Controller
 					<td>";
 							if($d->sd ==1){
 								echo " &#10004 ";
-							}							
+							}
 			echo "</td>
 			<td>";
 							if($d->sw ==1){
 								echo " &#10004 ";
-							}					
+							}
 			echo "</td>
 			<td>";
 							if($d->baik ==1){
 								echo " &#10004 ";
-							}					
+							}
 			echo "</td>
 			<td>";
 							if($d->rusak ==1){
 								echo " &#10004 ";
-							}					
+							}
 			echo "</td>
 			<td>".$d->rerata_waktu_penggunaan."</td>
 					<td>
 
-					<button type='button' class='btn btn-danger' onClick='hapusdata69modal(".$d->id_detail_peralatan_lab.",".$d->id_peralatan_lab.")'> 
+					<button type='button' class='btn btn-danger' onClick='hapusdata69modal(".$d->id_detail_peralatan_lab.",".$d->id_peralatan_lab.")'>
 						<span class='glyphicon glyphicon-remove'></span>
 					 </button>
 
@@ -769,182 +403,27 @@ class Mctrl1 extends CI_Controller
 
 		$idrecord = $this->input->post('idrecord');
 		$this->db->query("delete from detail_peralatan_lab where id_detail_peralatan_lab=$idrecord");
-	
+
 	}
 
 	function getdata69(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$q = $this->db->query("select * from peralatan_lab where id_submission = $idsubmission");
 		$dataprimer = $q->result();
+		//array [dataprimer][datasekunder]
+		$datacollection = array();
 		$nmr=1;
 		foreach ($dataprimer as $dp) {
 			$rowcount = $this->countdetailtabel69($dp->id_peralatan_lab);
-			
+			$datasss = array('nama_lab' => $dp->nama_lab);
 			$q2 = $this->db->query("select * from detail_peralatan_lab where id_peralatan_lab=".$dp->id_peralatan_lab);
 			$datasekunder = $q2->result();
-			
-			
-				if($rowcount==0){
-					echo "
-						<tr>
-							<td>$nmr</td>
-							<td>".$dp->nama_lab."</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>";
-							if(isdraf($idsubmission)){
-							echo "<th>
+			$datasss["detail_peralatan_lab"] = $datasekunder ;
 
-							<button type='button' class='btn btn-danger' onClick='hapusdata69(".$dp->id_peralatan_lab.")'> 
-								<span class='glyphicon glyphicon-remove'></span>
-							 </button>
-							 
-							</th>";
-							}
-						echo "</tr>
-					";
-				}elseif ($rowcount==1) {
-					echo "
-						<tr>
-							<td>$nmr</td>
-							<td>".$dp->nama_lab."</td>
-							<td>".$datasekunder[0]->jenis_prasarana."</td>
-							<td>".$datasekunder[0]->jumlah_unit."</td>
-							<td>".$datasekunder[0]->rasio."</td>
-							<td>";
-									if($datasekunder[0]->sd ==1){
-										echo " &#10004 ";
-									}							
-					echo "</td>
-					<td>";
-									if($datasekunder[0]->sw ==1){
-										echo " &#10004 ";
-									}					
-					echo "</td>
-					<td>";
-									if($datasekunder[0]->baik ==1){
-										echo " &#10004 ";
-									}					
-					echo "</td>
-					<td>";
-									if($datasekunder[0]->rusak ==1){
-										echo " &#10004 ";
-									}					
-					echo "</td>
-					<td>".$datasekunder[0]->rerata_waktu_penggunaan."</td>";
-					if(isdraf($idsubmission)){
-					echo "
-							<th>
-
-							<button type='button' class='btn btn-danger' onClick='hapusdata69(".$dp->id_peralatan_lab.")'> 
-								<span class='glyphicon glyphicon-remove'></span>
-							 </button>
-							 
-							</th>";
-						}
-						echo "</tr>
-
-
-
-					";
-				}else{
-					$bariske=1;
-					foreach ($datasekunder as $ds) {
-						
-						if($bariske==1){
-								echo "
-									<tr>
-										<td rowspan='".$rowcount."'>$nmr</td>
-										<td rowspan='".$rowcount."'>".$dp->nama_lab."</td>
-										<td>".$ds->jenis_prasarana."</td>
-										<td>".$ds->jumlah_unit."</td>
-										<td>".$ds->rasio."</td>
-										<td>";
-												if($ds->sd ==1){
-													echo " &#10004 ";
-												}							
-								echo "</td>
-								<td>";
-												if($ds->sw ==1){
-													echo " &#10004 ";
-												}					
-								echo "</td>
-								<td>";
-												if($ds->baik ==1){
-													echo " &#10004 ";
-												}					
-								echo "</td>
-								<td>";
-												if($ds->rusak ==1){
-													echo " &#10004 ";
-												}					
-								echo "</td>
-								<td>".$ds->rerata_waktu_penggunaan."</td>";
-								if(isdraf($idsubmission)){
-								echo "
-										<th rowspan='".$rowcount."'>
-
-										<button type='button' class='btn btn-danger' onClick='hapusdata69(".$dp->id_peralatan_lab.")'> 
-											<span class='glyphicon glyphicon-remove'></span>
-										 </button>
-										 	
-										</th>";
-								}
-									echo "</tr>
-
-
-
-								";
-						}elseif ($bariske>1) {
-							
-							echo "  
-									<tr>
-									
-										<td>".$ds->jenis_prasarana."</td>
-										<td>".$ds->jumlah_unit."</td>
-										<td>".$ds->rasio."</td>
-										<td>";
-												if($ds->sd ==1){
-													echo " &#10004 ";
-												}							
-								echo "</td>
-								<td>";
-												if($ds->sw ==1){
-													echo " &#10004 ";
-												}					
-								echo "</td>
-								<td>";
-												if($ds->baik ==1){
-													echo " &#10004 ";
-												}					
-								echo "</td>
-								<td>";
-												if($ds->rusak ==1){
-													echo " &#10004 ";
-												}					
-								echo "</td>
-									<td>".$ds->rerata_waktu_penggunaan."</td>
-									</tr>
-
-
-
-								";
-						}
-					$bariske++;
-					}
-
-				}	
-				
-			
-
-
-			$nmr++;
+			array_push($datacollection,$datasss);
 		}
+		echo json_encode($datacollection);
 	}
 	private function countdetailtabel69($idparent){
 		$this->db->where('id_peralatan_lab',$idparent);
@@ -1012,7 +491,7 @@ class Mctrl1 extends CI_Controller
 				if(isdraf($idsubmission)){
 				echo "<td>
 
-					<button type='button' class='btn btn-danger' onClick='hapusdata610(".$d->id_sistem_informasi.")'> 
+					<button type='button' class='btn btn-danger' onClick='hapusdata610(".$d->id_sistem_informasi.")'>
 						<span class='glyphicon glyphicon-remove'></span>
 					 </button>
 
@@ -1025,7 +504,7 @@ class Mctrl1 extends CI_Controller
 
 	function hapusdata610(){
 		$idrecord = $this->input->post('idrecord');
-	
+
 		$this->db->query("delete from sistem_informasi where id_sistem_informasi=$idrecord");
 	}
 
@@ -1069,7 +548,7 @@ class Mctrl1 extends CI_Controller
 	}
 	function hapusdata711(){
 		$idrecord = $this->input->post('idrecord');
-	
+
 		$this->db->query("delete from jumlah_judul_penelitian where id_jumlah_judul_penelitian=$idrecord");
 	}
 
@@ -1131,13 +610,13 @@ class Mctrl1 extends CI_Controller
 				echo "<td><a href='".base_url('submissionfile/download/')."/".$d->id_attachmentfile."' target='_blank'>Download File</a></td>";
 				if(isdraf($idsubmission)){
 				echo "<td>
-					<button type='button' class='btn btn-danger' onClick='hapusdata721(".$d->id_artikel_ilmiah_3tahun_terakhir.",".$d->id_attachmentfile.")'> 
+					<button type='button' class='btn btn-danger' onClick='hapusdata721(".$d->id_artikel_ilmiah_3tahun_terakhir.",".$d->id_attachmentfile.")'>
 						<span class='glyphicon glyphicon-remove'></span>
 					 </button>
 				</td>";
 				}
 			echo "</tr>";
-		$nmr++;	
+		$nmr++;
 		}
 	}
 
@@ -1150,14 +629,14 @@ class Mctrl1 extends CI_Controller
 	}
 
 	//722
-	
+
 	function simpandata722(){
 		$idsubmission = $this->input->post('idsubmission');
 		$st7f22c1 = $this->input->post('field1');
 		$st7f22c2 = $this->input->post('field2');
 		$st7f22c3 = $this->input->post('field3');
 		$st7f22c4 = $this->input->post('field4');
-		
+
 
 		$data = array(
 				'id_submission'=>$idsubmission,
@@ -1183,17 +662,17 @@ class Mctrl1 extends CI_Controller
 				echo "<td>".$d->judul_buku."</td>";
 				echo "<td>".$d->penulis."</td>";
 				echo "<td>".$d->isbn."</td>";
-				
+
 				echo "<td><a href='".base_url('submissionfile/download/')."/".$d->id_attachmentfile."' target='_blank'>Download File</a></td>";
 				if(isdraf($idsubmission)){
 				echo "<td>
-					<button type='button' class='btn btn-danger' onClick='hapusdata722(".$d->id_buku_ilmiah_3tahun_terakhir.",".$d->id_attachmentfile.")'> 
+					<button type='button' class='btn btn-danger' onClick='hapusdata722(".$d->id_buku_ilmiah_3tahun_terakhir.",".$d->id_attachmentfile.")'>
 						<span class='glyphicon glyphicon-remove'></span>
 					 </button>
 				</td>";
 				}
 			echo "</tr>";
-		$nmr++;	
+		$nmr++;
 		}
 	}
 
@@ -1211,9 +690,9 @@ class Mctrl1 extends CI_Controller
 		$st7f3c1 = $this->input->post('field1');
 		$st7f3c2 = $this->input->post('field2');
 		$data =array(
-			'id_submission' =>$idsubmission , 
-			'paten' =>$st7f3c1 , 
-			'nama_karya' =>$st7f3c2 
+			'id_submission' =>$idsubmission ,
+			'paten' =>$st7f3c1 ,
+			'nama_karya' =>$st7f3c2
 			);
 		$this->db->insert('karya_berhaki',$data);
 	}
@@ -1231,7 +710,7 @@ class Mctrl1 extends CI_Controller
 				if(isdraf($idsubmission)){
 				echo "<td>
 
-					<button type='button' class='btn btn-danger' onClick='hapusdata73(".$d->id_karya_berhaki.")'> 
+					<button type='button' class='btn btn-danger' onClick='hapusdata73(".$d->id_karya_berhaki.")'>
 						<span class='glyphicon glyphicon-remove'></span>
 					 </button>
 
@@ -1248,7 +727,7 @@ class Mctrl1 extends CI_Controller
 		$this->db->query("delete from karya_berhaki where id_karya_berhaki=$idrecord");
 	}
 
-	
+
 
 	function simpandata74(){
 		$idsubmission = $this->input->post('idsubmission');
@@ -1290,7 +769,7 @@ class Mctrl1 extends CI_Controller
 	}
 	function hapusdata74(){
 		$idrecord = $this->input->post('idrecord');
-	
+
 		$this->db->query("delete from jumlah_kegiatan_pengabdian_kepada_masyarakat where id_jumlah_kegiatan_pengabdian_kepada_masyarakat=$idrecord");
 	}
 
@@ -1339,7 +818,7 @@ class Mctrl1 extends CI_Controller
 
 	function hapusdata75(){
 		$idrecord = $this->input->post('idrecord');
-	
+
 		$this->db->query("delete from kerjasama_dalam_negeri where id_kerjasama_dalam_negeri=$idrecord");
 	}
 
@@ -1391,7 +870,7 @@ class Mctrl1 extends CI_Controller
 
 	function hapusdata76(){
 		$idrecord = $this->input->post('idrecord');
-	
+
 		$this->db->query("delete from kerjasama_luar_negeri where id_kerjasama_luar_negeri=$idrecord");
 	}
 
