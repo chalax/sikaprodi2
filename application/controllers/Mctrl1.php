@@ -431,120 +431,25 @@ class Mctrl1 extends CI_Controller
 		return $q->num_rows();
 	}
 
-	function hapusdata69(){
-			$idrecord = $this->input->post('idrecord');
-		$this->db->query("delete from detail_peralatan_lab where id_peralatan_lab=$idrecord");
-		$this->db->query("delete from peralatan_lab where id_peralatan_lab=$idrecord");
-	}
 
-	function simpandata610(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st6f10c1 = $this->input->post('field1');
-		$st6f10c2 = $this->input->post('field2');
-		$st6f10c3 = $this->input->post('field3');
-		$st6f10c4 = $this->input->post('field4');
-		$st6f10c5 = $this->input->post('field5');
-
-		$data = array(
-
-			'id_submission'=>$idsubmission,
-			'jenis_data'=>$st6f10c1,
-			'manual'=>$st6f10c2,
-			'komputer_luring'=>$st6f10c3,
-			'komputer_lan'=>$st6f10c4,
-			'komputer_wan'=>$st6f10c5
-
-			);
-
-		$this->db->insert('sistem_informasi',$data);
-	}
 
 	function getdata610(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$q = $this->db->query("select * from sistem_informasi where id_submission=$idsubmission");
 		$data = $q->result();
-		$nmr =1;
-		foreach ($data as $d) {
-			echo "<tr>";
-				echo "<td>$nmr</td>";
-				echo "<td>".$d->jenis_data."</td>";
-				echo "<td>";
-					if($d->manual==1){
-						echo " &#10004 ";
-					}
-				echo "</td>";
-				echo "<td>";
-					if($d->komputer_luring==1){
-						echo " &#10004 ";
-					}
-				echo "</td>";
-				echo "<td>";
-					if($d->komputer_lan==1){
-						echo " &#10004 ";
-					}
-				echo "</td>";
-				echo "<td>";
-					if($d->komputer_wan==1){
-						echo " &#10004 ";
-					}
-				echo "</td>";
-				if(isdraf($idsubmission)){
-				echo "<td>
-
-					<button type='button' class='btn btn-danger' onClick='hapusdata610(".$d->id_sistem_informasi.")'>
-						<span class='glyphicon glyphicon-remove'></span>
-					 </button>
-
-					</td>";
-				}
-			echo "</tr>";
-		$nmr++;
-		}
-	}
-
-	function hapusdata610(){
-		$idrecord = $this->input->post('idrecord');
-
-		$this->db->query("delete from sistem_informasi where id_sistem_informasi=$idrecord");
-	}
-
-	function simpandata711(){
-		$idsubmission = $this->input->post('idsubmission');
-		$st7f11c1 = $this->input->post('field1');
-		$st7f11c2 = $this->input->post('field2');
-		$st7f11c3 = $this->input->post('field3');
-		$st7f11c4 = $this->input->post('field4');
-
-		$data = array(
-				'id_submission'=>$idsubmission,
-				'sumber_pembiayaan'=>$st7f11c1,
-				'ts_2'=>$st7f11c2,
-				'ts_1'=>$st7f11c3,
-				'ts_0'=>$st7f11c4
-			);
-
-		$this->db->insert('jumlah_judul_penelitian',$data);
-
+		echo json_encode($data);
 
 	}
 
 	function getdata711(){
-		$idsubmission = $this->input->post('idsubmission');
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$this->db->where('id_submission',$idsubmission);
 		$q = $this->db->get('jumlah_judul_penelitian');
 		$data = $q->result();
 
-		foreach ($data as $d) {
-			echo "<tr>";
-				echo "<td>".$d->sumber_pembiayaan."</td>";
-				echo "<td>".$d->ts_2."</td>";
-				echo "<td>".$d->ts_1."</td>";
-				echo "<td>".$d->ts_0."</td>";
-				if(isdraf($idsubmission)){
-				echo "<td><button class='btn btn-danger' onClick='hapusdata711(".$d->id_jumlah_judul_penelitian.")'><span class='glyphicon glyphicon-remove'></span></button></td>";
-				}
-			echo "</tr>";
-		}
+		echo json_encode($data);
 	}
 	function hapusdata711(){
 		$idrecord = $this->input->post('idrecord');
