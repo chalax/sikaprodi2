@@ -12,7 +12,7 @@ class Mctrl extends CI_Controller
 	}
 
 	function userauth(){
-		
+
 
 		$obj = json_decode(file_get_contents('php://input'));
 		$username = $obj->uname;
@@ -22,14 +22,14 @@ class Mctrl extends CI_Controller
 		$hashedpassword = md5(clxsalt().$password);
 
 		$datauserdb = $this->checkuservailability($username,$hashedpassword);
-		
+
 		if($datauserdb!=false){
 			$datauserdb[0]["authencicated"]=true;
 			if(isadmin()){
 
 				echo json_encode($datauserdb);
 			}else{
-				
+
 				echo json_encode($datauserdb);
 			}
 		}else{
@@ -40,11 +40,11 @@ class Mctrl extends CI_Controller
 
 	private function checkuservailability($uname='',$password)
 	{
-	
+
 		$db = $this->db->query("select * from login where username='$uname' and password='$password'");
 		if($db->num_rows()>0){
 			$userdata = $this->getalluserdata($db);
-			
+
 			return $userdata;
 		}else{
 			return false;
@@ -52,11 +52,11 @@ class Mctrl extends CI_Controller
 	}
 
 	private function getalluserdata($db){
-		
+
 		$resutl = $db->result_array();
 		$idlogin = $resutl[0]['id_login'];
 		$ddb = $this->db->query("select * from user where id_login=$idlogin");
-		
+
 		if($ddb->num_rows()>0){
 			$result2 = $ddb->result_array();
 
@@ -98,10 +98,10 @@ class Mctrl extends CI_Controller
 		$idsubmission = $obj->id_submission;
 		$q4 = $this->db->query("select * from mahasiswa_dan_lulusan where id_submission=$idsubmission order by tskex desc");
 		$data4 = $q4->result();
-		
+
 		header('Content-Type: application/json');
 		echo json_encode($data4);
-		
+
 
 	}
 
@@ -123,7 +123,7 @@ class Mctrl extends CI_Controller
             <td colspan='7'></td>
         </tr>";
 	}
-	
+
 
 	function getdatastandar32(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -135,9 +135,9 @@ class Mctrl extends CI_Controller
 		echo json_encode($s);
 
 	}
-	
 
-	
+
+
 
 	function getdatastandar33(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -148,7 +148,7 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdatastandar34(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -160,7 +160,7 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdatastandar35(){
 	$obj = json_decode(file_get_contents('php://input'));
@@ -172,7 +172,7 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdatastandar36(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -184,11 +184,11 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdatastandar37(){
 			$obj = json_decode(file_get_contents('php://input'));
-		$idsubmission = $obj->id_submission;	
+		$idsubmission = $obj->id_submission;
 		$this->load->model('submission');
 		$h = $this->submission->selectdatastandar37($idsubmission);
 
@@ -196,11 +196,11 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdatastandar41(){
 			$obj = json_decode(file_get_contents('php://input'));
-		$idsubmission = $obj->id_submission;	
+		$idsubmission = $obj->id_submission;
 		$this->load->model('submission');
 		$h = $this->submission->selectdatastandar41($idsubmission);
 
@@ -211,8 +211,8 @@ class Mctrl extends CI_Controller
 
 	function getdatastandar42(){
 			$obj = json_decode(file_get_contents('php://input'));
-		$idsubmission = $obj->id_submission;	
-		
+		$idsubmission = $obj->id_submission;
+
 		$this->load->model('submission');
 		$h = $this->submission->selectdatastandar42($idsubmission);
 
@@ -220,14 +220,14 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	//--------------------------
 
 
 	function getdatastandar43(){
 			$obj = json_decode(file_get_contents('php://input'));
-		$idsubmission = $obj->id_submission;	
+		$idsubmission = $obj->id_submission;
 		$this->load->model('submission');
 		$h = $this->submission->selectdatastandar43($idsubmission);
 
@@ -235,9 +235,9 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
 
-	
+
+
 
 	function getdatadetaildataajardosentetap(){
 		$idparent = $this->input->post('iddataajardosentetap');
@@ -263,173 +263,59 @@ class Mctrl extends CI_Controller
 	}
 
 	function getdata44(){
-		$idsubmission = $this->input->post('idsubmission');
-
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$this->load->model('submission');
 		$h = $this->submission->selectdatal44($idsubmission);
-		$no =1;
-		
+		$datacollection = array();
+		/**
+		the idea is to put an array of datacollection[primarydata][secondarydata]
+
+		**/
+
 
 		foreach ($h as $datautama) {
+			$arrayofsecondarydata = array();
+			$arrayofsecondarydata['namadosen'] =$datautama->nama_dosen;
 			$rowspan = $this->countrecordbasedonparentid($datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps);
-
-			
-				
 				$datasekunder = $this->getdetailbyparentid($datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps);
+				$arrayofsecondarydata['bidang_keahlian'] = $datautama->bidang_keahlian;
+				$arrayofsecondarydata['detail'] = $datasekunder;
 
-				if($rowspan==0){
-					echo '<tr>';
-					echo '<th rowspan="1">'.$no.'</th>';
-					echo '<th rowspan="1">'.$datautama->nama_dosen.'</th>';
-					echo '<th rowspan="1">'.$datautama->bidang_keahlian.'</th>';
-							echo '<td></td>';
-							echo '<td></td>';
-							echo '<td></td>';
-							echo '<td></td>';
-							echo '<td></td>';
-					if(isdraf($idsubmission)){
-
-						echo '<th rowspan="1"><button type="button" onClick="hapusdata44('.$datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps.')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></th>';
-					}
-					echo '</tr>';
-
-				}elseif ($rowspan==1) {
-					echo '<tr>';
-					echo '<th rowspan="1">'.$no.'</th>';
-					echo '<th rowspan="1">'.$datautama->nama_dosen.'</th>';
-					echo '<th rowspan="1">'.$datautama->bidang_keahlian.'</th>';
-					foreach ($datasekunder as $ds) {
-							echo '<td>'.$ds->kode_matakuliah.'</td>';
-							echo '<td>'.$ds->nama_matakuliah.'</td>';
-							echo '<td>'.$ds->jumlah_kelas.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_direncanakan.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_terlaksana.'</td>';
-					}
-					if(isdraf($idsubmission)){
-
-						echo '<th rowspan="1"><button type="button" onClick="hapusdata44('.$datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps.')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></th>';
-					}
-					echo '</tr>';
-				}else{
-					$bb =1;
-					foreach ($datasekunder as $ds) {
-						if($bb==1){
-							echo '<tr>';
-							echo '<th rowspan="'.$rowspan.'">'.$no.'</th>';
-							echo '<th rowspan="'.$rowspan.'">'.$datautama->nama_dosen.'</th>';
-							echo '<th rowspan="'.$rowspan.'">'.$datautama->bidang_keahlian.'</th>';
-							echo '<td>'.$ds->kode_matakuliah.'</td>';
-							echo '<td>'.$ds->nama_matakuliah.'</td>';
-							echo '<td>'.$ds->jumlah_kelas.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_direncanakan.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_terlaksana.'</td>';
-							if(isdraf($idsubmission)){
-
-								echo '<th rowspan="'.$rowspan.'"><button type="button" onClick="hapusdata44('.$datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps.')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></th>';
-							}
-							echo '</tr>';
-
-						}else{
-
-							echo '<tr>';
-							echo '<td>'.$ds->kode_matakuliah.'</td>';
-							echo '<td>'.$ds->nama_matakuliah.'</td>';
-							echo '<td>'.$ds->jumlah_kelas.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_direncanakan.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_terlaksana.'</td>';
-							echo '</tr>';
-						}
-					$bb++;
-					}
-				}
-				
-			$no++;
+				array_push($datacollection,$arrayofsecondarydata);
 		}
-		
-	}
-	
-	function getdata45(){
-		$idsubmission = $this->input->post('idsubmission');
 
+
+		echo json_encode($datacollection);
+
+	}
+
+	function getdata45(){
+		$obj = json_decode(file_get_contents('php://input'));
+		$idsubmission = $obj->id_submission;
 		$this->load->model('submission');
 		$h = $this->submission->selectdatal45($idsubmission);
-		$no =1;
-		
+		$datacollection = array();
+		/**
+		the idea is to put an array of datacollection[primarydata][secondarydata]
+
+		**/
+
 
 		foreach ($h as $datautama) {
+			$arrayofsecondarydata = array();
+			$arrayofsecondarydata['namadosen'] =$datautama->nama_dosen;
 			$rowspan = $this->countrecordbasedonparentid($datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps);
-
-			
-				
 				$datasekunder = $this->getdetailbyparentid($datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps);
+				$arrayofsecondarydata['bidang_keahlian'] = $datautama->bidang_keahlian;
+				$arrayofsecondarydata['detail'] = $datasekunder;
 
-				if($rowspan==0){
-					echo '<tr>';
-					echo '<th rowspan="1">'.$no.'</th>';
-					echo '<th rowspan="1">'.$datautama->nama_dosen.'</th>';
-					echo '<th rowspan="1">'.$datautama->bidang_keahlian.'</th>';
-							echo '<td></td>';
-							echo '<td></td>';
-							echo '<td></td>';
-							echo '<td></td>';
-							echo '<td></td>';
-					if(isdraf($idsubmission)){
-
-						echo '<th rowspan="1"><button type="button" onClick="hapusdata44('.$datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps.')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></th>';
-					}echo '</tr>';
-
-				}elseif ($rowspan==1) {
-					echo '<tr>';
-					echo '<th rowspan="1">'.$no.'</th>';
-					echo '<th rowspan="1">'.$datautama->nama_dosen.'</th>';
-					echo '<th rowspan="1">'.$datautama->bidang_keahlian.'</th>';
-					foreach ($datasekunder as $ds) {
-							echo '<td>'.$ds->kode_matakuliah.'</td>';
-							echo '<td>'.$ds->nama_matakuliah.'</td>';
-							echo '<td>'.$ds->jumlah_kelas.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_direncanakan.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_terlaksana.'</td>';
-					}
-					if(isdraf($idsubmission)){
-
-						echo '<th rowspan="1"><button type="button" onClick="hapusdata44('.$datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps.')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></th>';
-					}
-					echo '</tr>';
-				}else{
-					$bb =1;
-					foreach ($datasekunder as $ds) {
-						if($bb==1){
-							echo '<tr>';
-							echo '<th rowspan="'.$rowspan.'">'.$no.'</th>';
-							echo '<th rowspan="'.$rowspan.'">'.$datautama->nama_dosen.'</th>';
-							echo '<th rowspan="'.$rowspan.'">'.$datautama->bidang_keahlian.'</th>';
-							echo '<td>'.$ds->kode_matakuliah.'</td>';
-							echo '<td>'.$ds->nama_matakuliah.'</td>';
-							echo '<td>'.$ds->jumlah_kelas.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_direncanakan.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_terlaksana.'</td>';
-							if(isdraf($idsubmission)){
-
-								echo '<th rowspan="1"><button type="button" onClick="hapusdata44('.$datautama->id_data_ajar_dosen_tetap_bidang_sesuai_ps.')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></th>';
-							}echo '</tr>';
-
-						}else{
-
-							echo '<tr>';
-							echo '<td>'.$ds->kode_matakuliah.'</td>';
-							echo '<td>'.$ds->nama_matakuliah.'</td>';
-							echo '<td>'.$ds->jumlah_kelas.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_direncanakan.'</td>';
-							echo '<td>'.$ds->jumlah_pertemuan_terlaksana.'</td>';
-							echo '</tr>';
-						}
-					$bb++;
-					}
-				}
-				
-			$no++;
+				array_push($datacollection,$arrayofsecondarydata);
 		}
-		
+
+
+		echo json_encode($datacollection);
+
 	}
 	// with this down function from function above
 	private function getdetailbyparentid($idparent){
@@ -440,7 +326,7 @@ class Mctrl extends CI_Controller
 
 	private function countrecordbasedonparentid($parentid){
 		$result = $this->db->query("select * from detail_data_ajar_dosen_tetap_bidang_sesuai_ps where id_data_ajar_dosen_tetap_bidang_sesuai_ps=$parentid");
-	
+
 		return $result->num_rows();
 
 	}
@@ -448,10 +334,10 @@ class Mctrl extends CI_Controller
 
 
 
-	
 
 
-	
+
+
 
 	function getdata46(){
 			$obj = json_decode(file_get_contents('php://input'));
@@ -465,13 +351,13 @@ class Mctrl extends CI_Controller
 
 	function gettotal46(){
 		$idsubmission=$this->input->post('idsubmission');
-	
+
 		$q = $this->db->query("select sum(jumlah_kelas) as jk, sum(jumlah_pertemuan_direncanakan) as jpr, sum(jumlah_pertemuan_terlaksana) as jpt from data_ajar_dosen_tetap_keahlian_diluar_bidang_ps where id_submission=$idsubmission");
 		$data = $q->result();
 		echo "
 
 		<tr>
-			
+
 			<td colspan='5'>Total</td>
 			<td>".$data[0]->jk."</td>
 			<td>".$data[0]->jpr."</td>
@@ -479,16 +365,16 @@ class Mctrl extends CI_Controller
 			if(isdraf($idsubmission)){
 				echo "<td></td>";
 			}
-			
+
 		echo "</tr>
 
 		";
 	}
 
-	
 
 
-	
+
+
 
 	function getdatastandar47(){
 			$obj = json_decode(file_get_contents('php://input'));
@@ -500,7 +386,7 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdata48(){
 			$obj = json_decode(file_get_contents('php://input'));
@@ -511,7 +397,7 @@ class Mctrl extends CI_Controller
 		header('Content-Type: application/json');
 		echo json_encode($h);
 	}
-	
+
 
 	function getdata49(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -523,7 +409,7 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdata410(){
 		$obj = json_decode(file_get_contents('php://input'));
@@ -535,7 +421,7 @@ class Mctrl extends CI_Controller
 		echo json_encode($h);
 	}
 
-	
+
 
 	function getdetail411(){
 		$idparent = $this->input->post('idprnt');
@@ -554,7 +440,7 @@ class Mctrl extends CI_Controller
 				echo " </td>";
 				echo "<td><a href='".base_url('submissionfile/download')."/".$dt->id_attachmentfile."'>Download File</a></td>";
 				echo "<td><button class='btn btn-danger' onClick='hapusdetail411(".$dt->id_detail_kegiatan_dosen_tetap_dalam_seminar.",".$dt->id_kegiatan_dosen_tetap_dalam_seminar.")'><span class='glyphicon glyphicon-remove'></span></td>";
-			
+
 			echo "</tr>";
 		}
 	}
@@ -562,7 +448,7 @@ class Mctrl extends CI_Controller
 	function getdata411(){
 		$obj = json_decode(file_get_contents('php://input'));
 		$idsubmission = $obj->id_submission;
-		
+
 		$duquery = $this->db->query("select * from kegiatan_dosen_tetap_dalam_seminar where id_submission=$idsubmission");
 		$datautama = $duquery->result();
 		$nmr=1;
@@ -603,7 +489,7 @@ class Mctrl extends CI_Controller
 							echo " </td>";
 							echo "<td><a href='".base_url('submissionfile/download')."/".$datasekunder[0]->id_attachmentfile."'>Download File</a></td>";
 						if(isdraf($idsubmission)){
-							
+
 						echo "<th><button class='btn btn-danger' onClick='hapusdata411(".$du->id_kegiatan_dosen_tetap_dalam_seminar.")'><span class='glyphicon glyphicon-remove'></span></th>";
 						}
 
@@ -613,7 +499,7 @@ class Mctrl extends CI_Controller
 
 
 					foreach ($datasekunder as $ds) {
-							
+
 							if ($idb==1) {
 								echo "<tr>";
 									echo "<td rowspan='$rowspan'>".$nmr."</td>";
@@ -629,7 +515,7 @@ class Mctrl extends CI_Controller
 										echo " </td>";
 										echo "<td><a href='".base_url('submissionfile/download')."/".$ds->id_attachmentfile."'>Download File</a></td>";
 									if(isdraf($idsubmission)){
-										
+
 									echo "<th rowspan='$rowspan'><button class='btn btn-danger' onClick='hapusdata411(".$du->id_kegiatan_dosen_tetap_dalam_seminar.")'><span class='glyphicon glyphicon-remove'></span></th>";
 									}
 								echo "</tr>";
@@ -646,7 +532,7 @@ class Mctrl extends CI_Controller
 										echo " </td>";
 										echo "<td><a href='".base_url('submissionfile/download')."/".$ds->id_attachmentfile."'>Download File</a></td>";
 
-										
+
 								echo "</tr>";
 							}
 						$idb++;
@@ -661,7 +547,7 @@ class Mctrl extends CI_Controller
 
 	private function countitembasedparent($parentid){
 		$a = $this->db->query("select * from detail_kegiatan_dosen_tetap_dalam_seminar where id_kegiatan_dosen_tetap_dalam_seminar=$parentid");
-		return $a->num_rows(); 
+		return $a->num_rows();
 	}
 
 
@@ -739,7 +625,7 @@ class Mctrl extends CI_Controller
 					if(isdraf($idsubmission)){
 						echo "<th><button class='btn btn-danger' onClick='hapusdata412(".$dp->id_pencapaian_prestasi_dosen.")'><span class='glyphicon glyphicon-remove'></span></th>";
 					}
-					
+
 				echo "</tr>";
 			}elseif ($rowspan==1) {
 				echo "<tr>";
@@ -752,13 +638,13 @@ class Mctrl extends CI_Controller
 					if(isdraf($idsubmission)){
 						echo "<th><button class='btn btn-danger' onClick='hapusdata412(".$dp->id_pencapaian_prestasi_dosen.")'><span class='glyphicon glyphicon-remove'></span></th>";
 					}
-					
+
 				echo "</tr>";
 			}else{
 				$dd = 1;
 
 				foreach ($datasekunder as $ds) {
-					
+
 					if($dd==1){
 						echo "<tr>";
 							echo "<td rowspan='$rowspan'>$nmr</td>";
@@ -770,23 +656,23 @@ class Mctrl extends CI_Controller
 							if(isdraf($idsubmission)){
 								echo "<th rowspan='$rowspan'><button class='btn btn-danger' onClick='hapusdata412(".$dp->id_pencapaian_prestasi_dosen.")'><span class='glyphicon glyphicon-remove'></span></th>";
 							}
-							
+
 						echo "</tr>";
 					}else{
 						echo "<tr>";
-							
+
 								echo "<td>".$ds->prestasi_yang_dicapai."</td>";
 								echo "<td>".$ds->waktu_pencapaian."</td>";
 								echo "<td>".$ds->tingkat."</td>";
 								echo "<td><a href='".base_url('submissionfile/download')."/".$ds->id_attachmentfile."'>Download File</a></td>";
-							
+
 						echo "</tr>";
 					}
 
 					$dd++;
 				}
 
-				
+
 			}
 
 			$nmr++;
@@ -875,7 +761,7 @@ class Mctrl extends CI_Controller
 					if(isdraf($idsubmission)){
 						echo "<th><button class='btn btn-danger' onClick='hapusdata413(".$dp->id_keikutsertaan_dosen_tetap_dalam_organisasi_keilmuan.")'><span class='glyphicon glyphicon-remove'></span></th>";
 					}
-					
+
 				echo "</tr>";
 			}elseif ($rowspan==1) {
 				echo "<tr>";
@@ -893,7 +779,7 @@ class Mctrl extends CI_Controller
 				$dd = 1;
 
 				foreach ($datasekunder as $ds) {
-					
+
 					if($dd==1){
 						echo "<tr>";
 							echo "<td rowspan='$rowspan'>$nmr</td>";
@@ -908,19 +794,19 @@ class Mctrl extends CI_Controller
 						echo "</tr>";
 					}else{
 						echo "<tr>";
-							
+
 								echo "<td>".$ds->nama_organisasi_keilmuan."</td>";
 								echo "<td>".$ds->kurun_waktu."</td>";
 								echo "<td>".$ds->tingkat."</td>";
 								echo "<td><a href='".base_url('submissionfile/download')."/".$ds->id_attachmentfile."'>Download File</a></td>";
-							
+
 						echo "</tr>";
 					}
 
 					$dd++;
 				}
 
-				
+
 			}
 
 			$nmr++;
