@@ -33,7 +33,7 @@ class Mctrl extends CI_Controller
 				echo json_encode($datauserdb);
 			}
 		}else{
-			$datauserdb = [["authencicated"=>false]];
+			$datauserdb = ["authencicated"=>false];
 				echo json_encode($datauserdb);
 		}
 	}
@@ -272,7 +272,6 @@ class Mctrl extends CI_Controller
 		the idea is to put an array of datacollection[primarydata][secondarydata]
 
 		**/
-
 
 		foreach ($h as $datautama) {
 			$arrayofsecondarydata = array();
